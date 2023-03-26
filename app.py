@@ -12,7 +12,8 @@ from src.backend.routes import (
     likes,
     update_story,
     get_all_stories_by_userID,
-    goal_update_endpoint
+    goal_update_endpoint,
+    database_export
 )
 
 app = FastAPI()
@@ -33,6 +34,10 @@ app.include_router(
 )
 app.include_router(
     users_endpoint.app,
+    tags=["User"]
+)
+app.include_router(
+    database_export.app,
     tags=["User"]
 )
 app.include_router(
