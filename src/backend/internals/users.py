@@ -9,6 +9,7 @@ from sqlmodel import Session, Field
 from src.backend.database import engine
 from src.backend.database.orm import User, UserMetadata
 from src.backend.routes.nickname_validation import validate_nickname
+from src.backend.internals.mail import send_mail
 
 NICKNAME_PATTERN = re.compile(r"^[a-zA-Z0-9]+$")
 PASSWORD_PATTERN = re.compile(r"[0-9]")
@@ -50,7 +51,10 @@ def user_registrate(user_data) -> User:
     new_user = User(
         nickname=user_data.nickname,
         password=user_data.password,
+        user_email=user_data.mail
     )
+
+    send_mail("Successfully registrated in ActNow project!", mail_to=user_data.mail, mail_subject="ActNow")
 
     with Session(engine) as session:
         User.create(new_user, session)
@@ -134,7 +138,7 @@ class Metadata(Photo, Description):
 
 
 class UserRequest(Metadata, Nickname, Credentials):
-    ...
+    mail: str
 
 
 class UserResponse(Metadata, Nickname):
