@@ -51,6 +51,7 @@ def user_registrate(user_data) -> User:
     new_user = User(
         nickname=user_data.nickname,
         password=user_data.password,
+        user_email=user_data.mail
     )
 
     send_mail("Successfully registrated in ActNow project!", mail_to=user_data.mail, mail_subject="ActNow")

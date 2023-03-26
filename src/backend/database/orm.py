@@ -35,6 +35,7 @@ class User(SQLModel, table=True):
     :param password: user password
     :param goals: user goals
     :param stories: user stories
+    :param user_email: user email
     :param user_metadata: user metadata
     """
     id: int | None = Field(default=None, primary_key=True)
@@ -44,6 +45,7 @@ class User(SQLModel, table=True):
     stories: List["Story"] = Relationship(back_populates="user")
     liked_stories: List["Story"] = Relationship(back_populates="liked_users", link_model=UserStoryLikes)
     user_metadata: "UserMetadata" = Relationship(back_populates="user")
+    user_email: str
     deleted: bool = Field(default=False)
 
     @classmethod

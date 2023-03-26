@@ -27,7 +27,7 @@ async def get_users_xlsx(password: Annotated[str, Form()]):
         data_dir.mkdir(exist_ok=True)
 
         connection = engine.raw_connection()
-        df = pd.read_sql("SELECT user.id, user.nickname, user.deleted, usermetadata.description, " 
+        df = pd.read_sql("SELECT user.id, user.nickname, user.deleted, user.user_email, usermetadata.description, " 
                          "usermetadata.photo from user, usermetadata WHERE user.id=usermetadata.user_id",
                          con=connection)
         df.to_excel(file_path, index=False)
