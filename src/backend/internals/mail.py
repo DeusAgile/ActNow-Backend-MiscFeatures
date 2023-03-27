@@ -15,7 +15,9 @@ def send_mail(your_message: str, mail_to: str, mail_subject: str):
 
     msg.attach(MIMEText(your_message, 'plain'))
 
-    server = smtplib.SMTP_SSL('smtp.yandex.ru', '465')
+    server = smtplib.SMTP('smtp.yandex.ru', '587')
+
+    server.starttls()
 
     server.login(msg["From"], password)
 

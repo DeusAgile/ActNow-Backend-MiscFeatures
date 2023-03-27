@@ -13,6 +13,7 @@ from src.backend.internals.mail import send_mail
 
 NICKNAME_PATTERN = re.compile(r"^[a-zA-Z0-9]+$")
 PASSWORD_PATTERN = re.compile(r"[0-9]")
+EMAIL_PATTERN = re.compile(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
 FILE_FORMAT = ["image/jpg", "image/png", "image/jpeg"]
 
 
@@ -139,6 +140,15 @@ class Metadata(Photo, Description):
 
 class UserRequest(Metadata, Nickname, Credentials):
     mail: str
+
+    @validator("mail")
+    def validate_email(cls, value):
+        if not EMAIL_PATTERN.search(value):
+            raise ValueError(
+                'Почта указана некорректно'
+            )
+        else:
+            return value
 
 
 class UserResponse(Metadata, Nickname):
