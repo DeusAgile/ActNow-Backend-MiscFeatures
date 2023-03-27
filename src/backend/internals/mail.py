@@ -7,6 +7,7 @@ from os import environ
 def send_mail(your_message: str, mail_to: str, mail_subject: str):
 
     msg = MIMEMultipart()
+    # html_response = open("src/frontend/reg_mail.html")
 
     password = environ.get("MAIL_PASS")
     msg['From'] = environ.get("MAIL_FROM")

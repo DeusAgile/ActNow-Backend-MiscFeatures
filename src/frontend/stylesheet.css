@@ -1,0 +1,26 @@
+:root {
+    --header-color: #F4AFAF
+}
+
+.logoclass {
+    width: 100vw;
+    height: 30vh;
+    background-color: var(--header-color);
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.textclass {
+    width: 100vw;
+    height: 50vh;
+    display: flex;
+    left: 30vw;
+    flex-direction: column;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+.content-text {
+    padding-top: 5vh;
+}
